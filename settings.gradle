@@ -1,0 +1,4 @@
+rootProject.name = 'StubbedMock'
+include ':demo', ':stubbedmock'
+findProject(':demo')?.name = 'stubbedmock-demo'
+findProject(":stubbedmock")?.name = 'stubbedmock-lib'

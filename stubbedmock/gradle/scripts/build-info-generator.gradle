@@ -1,0 +1,32 @@
+/**
+ * Generates build information from Gradle configuration.
+ */
+
+def generatedDir = "$buildDir/generated"
+
+// noinspection GroovyAssignabilityCheck
+task generateBuildInfo {
+    inputs.property "version", rootProject.version.toString()
+    inputs.property "name", rootProject.name.toString()
+
+    outputs.dir generatedDir
+    outputs.upToDateWhen { false }
+
+    doFirst {
+        def buildInfoFile = file("$generatedDir/BuildInfo.kt")
+        buildInfoFile.parentFile.mkdirs()
+        buildInfoFile.text = """
+        internal data class BuildInfo(
+          val version: String = "${project.version.toString() ?: "unspecified"}",
+          val name: String = "${project.name.toString() ?: "unspecified"}"
+        )
+        """.replace("        ", "").trim()
+    }
+}
+
+sourceSets.main.kotlin.srcDirs += generatedDir
+
+project.afterEvaluate {
+    compileJava.dependsOn generateBuildInfo
+    compileKotlin.dependsOn generateBuildInfo
+}

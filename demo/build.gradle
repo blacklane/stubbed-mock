@@ -1,0 +1,23 @@
+apply plugin: "java"
+apply plugin: "kotlin"
+
+group 'com.blacklane.jvm'
+version 'STATIC'
+
+project.buildDir = outputDir
+sourceSets.main.java.srcDirs += javaSourceDir
+sourceSets.main.kotlin.srcDirs += kotlinSourceDir
+sourceSets.main.resources.srcDirs += resourcesDir
+
+sourceCompatibility = javaSourceLevel
+targetCompatibility = javaTargetLevel
+compileKotlin {
+    kotlinOptions.jvmTarget = kotlinTargetLevel
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = kotlinTargetLevel
+}
+
+dependencies {
+    implementation project(':stubbedmock-lib')
+}
