@@ -1,2 +1,1 @@
-# stubbed-mock
-Data model mocking library for JVM projects.
+# < WORK IN PROGRESS >
