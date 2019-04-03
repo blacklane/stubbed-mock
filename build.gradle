@@ -1,6 +1,7 @@
 ext {
     gradleVersionCode = "4.10"
     kotlinTargetLevel = "1.6"
+    junitVersion = "4.12"
     javaSourceLevel = "1.8"
     javaTargetLevel = "1.6"
     outputDir = "build"
