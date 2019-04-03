@@ -5,6 +5,10 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="com.blacklane.jvm.stubbedmock-demo.main" target="1.6" />
+      <module name="com.blacklane.jvm.stubbedmock-demo.test" target="1.6" />
+      <module name="com.blacklane.jvm.stubbedmock-lib.main" target="1.6" />
+      <module name="com.blacklane.jvm.stubbedmock-lib.test" target="1.6" />
       <module name="com.blacklane.jvm.stubbedmock.main" target="1.6" />
       <module name="com.blacklane.jvm.stubbedmock.test" target="1.6" />
     </bytecodeTargetLevel>
