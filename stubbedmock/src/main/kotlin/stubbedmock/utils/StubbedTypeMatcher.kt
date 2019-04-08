@@ -24,16 +24,15 @@ object StubbedTypeMatcher {
 
   val WRAPPER_TYPES = getWrapperTypes()
 
-  private fun getWrapperTypes(): Map<String, Any> {
-    val ret = HashMap<String, Any>()
-    ret.put("class java.lang.Boolean", BOOLEAN_DEFAULT_VALUE)
-    ret.put("class java.lang.Character", CHARACTER_DEFAULT_VALUE)
-    ret.put("class java.lang.Byte", NUMBER_DEFAULT_VALUE.toByte())
-    ret.put("class java.lang.Short", NUMBER_DEFAULT_VALUE.toShort())
-    ret.put("class java.lang.Integer", NUMBER_DEFAULT_VALUE)
-    ret.put("class java.lang.Long", NUMBER_DEFAULT_VALUE.toLong())
-    ret.put("class java.lang.Float", NUMBER_DEFAULT_VALUE.toFloat())
-    ret.put("class java.lang.Double", NUMBER_DEFAULT_VALUE.toDouble())
-    return ret
-  }
+  private fun getWrapperTypes() = mapOf(
+    "class java.lang.Boolean" to BOOLEAN_DEFAULT_VALUE,
+    "class java.lang.Character" to CHARACTER_DEFAULT_VALUE,
+    "class java.lang.Byte" to NUMBER_DEFAULT_VALUE.toByte(),
+    "class java.lang.Short" to NUMBER_DEFAULT_VALUE.toShort(),
+    "class java.lang.Integer" to NUMBER_DEFAULT_VALUE,
+    "class java.lang.Long" to NUMBER_DEFAULT_VALUE.toLong(),
+    "class java.lang.Float" to NUMBER_DEFAULT_VALUE.toFloat(),
+    "class java.lang.Double" to NUMBER_DEFAULT_VALUE.toDouble()
+  )
+
 }

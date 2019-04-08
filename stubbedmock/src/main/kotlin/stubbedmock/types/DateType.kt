@@ -6,7 +6,7 @@ import java.util.Date
 import java.util.Locale
 
 class DateType : StubbedType {
-  override fun getMockedValue(clazz: Class<*>): Any = getStaticDate()
+  override fun getStubbedValue(clazz: Class<*>): Any = getStaticDate()
 
   private fun getCurrentDate(): Any = Date()
 

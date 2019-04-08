@@ -1,34 +1,33 @@
 package stubbedmock.domain
 
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import stubbedmock.annotation.StubbedField
+import stubbedmock.annotation.Stub
 import stubbedmock.annotation.StubbedMock
-import stubbedmock.annotation.StubbedMockito.initStubbedMocks
+import stubbedmock.annotation.StubAnnotationParser.initStubbedMocks
 
 class AddressTest {
 
-  //to override default values use stubbedField and override the needed values
+  // to override default values use stubbedField and override the needed values
   @StubbedMock(
-    StubbedField("streetName", "Ahmed"),
-    StubbedField("streetNumber", intValue = 42),
-    StubbedField("streetDiameter", floatValue = 50f)
+    Stub("streetName", "Ahmed"),
+    Stub("streetNumber", intValue = 42),
+    Stub("streetDiameter", floatValue = 50f)
   )
   lateinit var address: Address
 
-  @Before fun setup() {
-    initStubbedMocks(this)
+  @Before fun setup() = initStubbedMocks(this)
+
+  @Test fun overriddenValues() {
+    with(address) {
+      assertEquals(streetName, "Ahmed")
+      assertEquals(streetNumber, 42)
+      assertEquals(streetDiameter, 50f)
+    }
   }
 
-  @Test fun testOverriddenValues() {
-    assertEquals(address.streetName, "Ahmed")
-    assertEquals(address.streetNumber, 42)
-    assertEquals(address.streetDiameter, 50f)
-  }
-
-  @Test fun testDefaultValues() {
+  @Test fun defaultValues() {
     assertEquals(address.zone, "zone")
   }
 

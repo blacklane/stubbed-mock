@@ -1,5 +1,5 @@
 package stubbedmock.exception
 
-class StubbedMockException(message: String, t: Throwable? = null) : Exception(message, t)
+class StubbedMockException(message: String, origin: Throwable? = null) : Exception(message, origin)
 
 

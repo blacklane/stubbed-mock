@@ -1,5 +1,5 @@
 package stubbedmock.models
 
 enum class Status {
-    SINGLE, ENGAGED, MARRIED
+  SINGLE, ENGAGED, MARRIED
 }

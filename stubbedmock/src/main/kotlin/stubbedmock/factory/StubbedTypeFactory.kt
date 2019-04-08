@@ -17,16 +17,14 @@ import stubbedmock.utils.StubbedTypeMatcher.isPrimitive
 import stubbedmock.utils.StubbedTypeMatcher.isString
 
 class StubbedTypeFactory {
-
-  fun getValue(clazz: Class<*>, varName: String): StubbedType =
-      when {
-        isPrimitive(clazz) -> PrimitiveType()
-        isAutoBoxedPrimitive(clazz) -> AutoBoxedType()
-        isString(clazz) -> StringType(varName)
-        isEnum(clazz) -> EnumType()
-        isCollection(clazz) -> CollectionType()
-        isMap(clazz) -> MapType()
-        isDate(clazz) -> DateType()
-        else -> ClassType()
-      }
+  fun getValue(clazz: Class<*>, varName: String): StubbedType = when {
+    isPrimitive(clazz) -> PrimitiveType()
+    isAutoBoxedPrimitive(clazz) -> AutoBoxedType()
+    isString(clazz) -> StringType(varName)
+    isEnum(clazz) -> EnumType()
+    isCollection(clazz) -> CollectionType()
+    isMap(clazz) -> MapType()
+    isDate(clazz) -> DateType()
+    else -> ClassType()
+  }
 }

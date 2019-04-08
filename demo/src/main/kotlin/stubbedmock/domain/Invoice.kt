@@ -13,5 +13,4 @@ data class Invoice(
     println("I am computing the lazy value")
     "4901110129"
   }
-
 }

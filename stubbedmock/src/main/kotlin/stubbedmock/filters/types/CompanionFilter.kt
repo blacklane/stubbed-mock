@@ -4,8 +4,6 @@ import java.lang.reflect.Field
 
 private const val COMPANION_FILTER = "Companion"
 
-class CompanionFilter : StubbedFilter {
-
-  override fun isFiltered(field: Field) =
-      field.type.simpleName == COMPANION_FILTER
+class CompanionFilter : StubFilter {
+  override fun isFiltered(field: Field) = field.type.simpleName == COMPANION_FILTER
 }

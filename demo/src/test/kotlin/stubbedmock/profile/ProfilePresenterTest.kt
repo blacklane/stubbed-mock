@@ -9,14 +9,14 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
 import stubbedmock.annotation.StubbedMock
-import stubbedmock.annotation.StubbedMockito.initStubbedMocks
+import stubbedmock.annotation.StubAnnotationParser.initStubbedMocks
 
 class ProfilePresenterTest {
 
-  @Mock private lateinit var repository: ProfileRepository
-  @Mock private lateinit var view: ProfileView
+  @Mock lateinit var repository: ProfileRepository
+  @Mock lateinit var view: ProfileView
 
-  @StubbedMock private lateinit var user: User
+  @StubbedMock lateinit var user: User
 
   private lateinit var presenter: ProfilePresenter
 

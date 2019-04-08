@@ -3,13 +3,13 @@ package stubbedmock.mock
 import stubbedmock.exception.StubbedMockException
 import stubbedmock.factory.StubbedTypeFactory
 import stubbedmock.filters.MockFilters
-import stubbedmock.filters.types.StubbedFilter
+import stubbedmock.filters.types.StubFilter
 import stubbedmock.types.ClassType
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Parameter
 
-object StubbedMocker {
+object Stubber {
 
   private val pendingMockedClasses = mutableListOf<String>()
 
@@ -34,11 +34,11 @@ object StubbedMocker {
     pendingMockedClasses.remove(clazz::class.java.simpleName)
   }
 
-  fun <T : Any> stubbedMock(
-      clazz: Class<T>,
-      classFields: Map<String, Any> = hashMapOf(),
-      stubbedFieldsMap: MutableMap<String, Any> = mutableMapOf(),
-      filters: List<StubbedFilter> = emptyList()
+  fun <T : Any> run(
+    clazz: Class<T>,
+    classFields: Map<String, Any> = hashMapOf(),
+    stubbedFieldsMap: MutableMap<String, Any> = mutableMapOf(),
+    filters: List<StubFilter> = emptyList()
   ): T {
 
     val classConstructors = clazz.declaredConstructors
@@ -64,11 +64,10 @@ object StubbedMocker {
   }
 
   private fun <T> createObjectInstance(
-      constructorStartIndex: Int,
-      clazz: Class<T>,
-      classConstructors: Array<out Constructor<*>>
+    constructorStartIndex: Int,
+    clazz: Class<T>,
+    classConstructors: Array<out Constructor<*>>
   ): T {
-
     var constructorIndex = constructorStartIndex
     val targetConstructor: Constructor<*> = classConstructors[constructorIndex]
     val constructor = clazz.getConstructor(*targetConstructor.parameterTypes)
@@ -78,10 +77,11 @@ object StubbedMocker {
       constructor.newInstance(*mockedConstructorValues.toTypedArray())
     } catch (exception: Exception) {
       constructorIndex++
-      if (constructorIndex < classConstructors.size)
+      if (constructorIndex < classConstructors.size) {
         createObjectInstance(constructorIndex, clazz, classConstructors)
-      else
-        throw StubbedMockException("${clazz.simpleName} could not be initiated !!", exception)
+      } else {
+        throw StubbedMockException("${clazz.simpleName} could not be initialized !!", exception)
+      }
     }
   }
 
@@ -94,9 +94,9 @@ object StubbedMocker {
   }
 
   private fun mockClassField(
-      objectInstance: Any,
-      field: Field,
-      mockFilters: MockFilters
+    objectInstance: Any,
+    field: Field,
+    mockFilters: MockFilters
   ) {
     if (mockFilters.isFiltered(field)) return
     val mockedValue = mockWithDefault(field.type, field.name)
@@ -106,14 +106,14 @@ object StubbedMocker {
   private fun mockWithDefault(clazz: Class<*>, varName: String): Any {
     val mockedValue = StubbedTypeFactory().getValue(clazz, varName)
     if (mockedValue !is ClassType) {
-      return mockedValue.getMockedValue(clazz)
+      return mockedValue.getStubbedValue(clazz)
     }
     try {
-      return stubbedMock(clazz)
+      return run(clazz)
     } catch (exception: StubbedMockException) {
       throw exception
     } catch (exception: Exception) {
-      throw StubbedMockException("${clazz.simpleName} type is not Supported !!", exception)
+      throw StubbedMockException("Type ${clazz.simpleName} is not supported, a custom filter is required to support it", exception)
     }
   }
 }

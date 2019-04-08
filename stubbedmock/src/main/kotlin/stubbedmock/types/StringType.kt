@@ -3,8 +3,5 @@ package stubbedmock.types
 import stubbedmock.factory.StubbedType
 
 class StringType(var name: Any) : StubbedType {
-
-  override fun getMockedValue(clazz: Class<*>): Any = getFieldDefaultName()
-
-  private fun getFieldDefaultName(): Any = name
+  override fun getStubbedValue(clazz: Class<*>): Any = name
 }

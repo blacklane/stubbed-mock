@@ -2,6 +2,6 @@ package stubbedmock.filters.types
 
 import java.lang.reflect.Field
 
-interface StubbedFilter {
+interface StubFilter {
   fun isFiltered(field: Field): Boolean
 }

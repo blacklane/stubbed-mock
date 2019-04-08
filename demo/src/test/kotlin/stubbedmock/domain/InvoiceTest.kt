@@ -1,36 +1,30 @@
 package stubbedmock.domain
 
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import stubbedmock.annotation.StubbedMock
-import stubbedmock.annotation.StubbedMockito.initStubbedMocks
+import stubbedmock.annotation.StubAnnotationParser.initStubbedMocks
 import stubbedmock.filters.types.LazyFilter
-import stubbedmock.filters.types.StubbedFilter
+import stubbedmock.filters.types.StubFilter
 import java.lang.reflect.Field
 
 class InvoiceTest {
 
-  @StubbedMock private lateinit var invoice: Invoice
-  /*
-  Invoice class has bankTransaction val which is lazy type
-  since lazy is not supported as a type you can add LazyFilter() to the library and it will skip mocking it
-  lazy filter is already implemented in the library so you can directly add to filters
+  @StubbedMock lateinit var invoice: Invoice
 
-  Invoice class has invoiceHistory val which is BigInteger
-  since BigInteger is not supported as a type we need to add custom filter since this filter not implemented
-  in the library so we need to create class that implement 'StubbedFilter' interface
-  */
+  // Invoice class has one lazy (bankTransaction) and one BigInteger property (invoiceHistory)
+  // these are not stubbed by default, they require additional stubbing filters
+  val stubFilters = listOf(LazyFilter(), BigIntegerFilter())
 
-  @Before fun setup() {
-    initStubbedMocks(this, filters = listOf(LazyFilter(), BigIntegerFilter()))
+  @Before fun setup() = initStubbedMocks(this, stubFilters)
+
+  @Test fun values() {
+    assertEquals(invoice.invoiceName, "invoiceName")
   }
 
-  @Test fun testValues() {
-    Assert.assertEquals(invoice.invoiceName, "invoiceName")
-  }
 }
 
-class BigIntegerFilter : StubbedFilter {
-  override fun isFiltered(field: Field): Boolean = (field.type.simpleName == "BigInteger")
+class BigIntegerFilter : StubFilter {
+  override fun isFiltered(field: Field) = field.type.simpleName == "BigInteger"
 }
