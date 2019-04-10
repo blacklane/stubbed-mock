@@ -1,1 +1,0 @@
-fun main() = println("Samples launched: '${LibraryInfo.name}' is at version ${LibraryInfo.version}")

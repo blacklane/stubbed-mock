@@ -19,5 +19,14 @@ compileTestKotlin {
 }
 
 dependencies {
-    implementation project(':stubbedmock-lib')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  
+    // demo dependencies
+    implementation "io.reactivex.rxjava2:rxjava:2.2.8"
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
+    testImplementation "junit:junit:$junitVersion"
+  
+    // adding stubbed-mock library
+    testImplementation project(':stubbedmock-lib')
 }
