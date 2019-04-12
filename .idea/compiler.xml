@@ -11,6 +11,10 @@
       <module name="com.blacklane.jvm.stubbedmock-lib.test" target="1.6" />
       <module name="com.blacklane.jvm.stubbedmock.main" target="1.6" />
       <module name="com.blacklane.jvm.stubbedmock.test" target="1.6" />
+      <module name="StubbedMock.stubbedmock-demo.main" target="1.6" />
+      <module name="StubbedMock.stubbedmock-demo.test" target="1.6" />
+      <module name="StubbedMock.stubbedmock-lib.main" target="1.6" />
+      <module name="StubbedMock.stubbedmock-lib.test" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -110,3 +110,7 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Custom ignores
+/.idea/kannotator.xml
+/.idea/codeStyles/codeStyleConfig.xml

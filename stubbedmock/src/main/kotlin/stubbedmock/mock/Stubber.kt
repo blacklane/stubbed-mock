@@ -113,7 +113,7 @@ object Stubber {
     } catch (exception: StubbedMockException) {
       throw exception
     } catch (exception: Exception) {
-      throw StubbedMockException("Type ${clazz.simpleName} is not supported, a custom filter is required to support it", exception)
+      throw StubbedMockException("Type ${clazz.simpleName} is not supported, add a filter to skip it", exception)
     }
   }
 }

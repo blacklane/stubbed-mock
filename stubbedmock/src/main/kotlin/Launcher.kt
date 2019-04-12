@@ -1,1 +1,0 @@
-fun main() = println("Library '${LibraryInfo.name}' v${LibraryInfo.version} launched.")
