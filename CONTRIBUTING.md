@@ -1,11 +1,13 @@
-# Contributing guidelines
+# Contributing Guide
 
-First of all, don't be afraid of contributing. Every contribution has value, and we
-really appreciate external people helping out. In case you are unsure about anything
-related to your contribution, we'll be there every step of the way to help. Let's
-do this together.
+First of all, thank you for being here! And don't be afraid of contributing.
+Every contribution has value, and we appreciate the help. If you're unsure about
+anything, feel free to reach out to a maintainer. We'll be there to help every
+step of the way.
 
-#### Table of contents
+Let's do this together :muscle:
+
+### Table of contents
 
 - [Code of Conduct](#code-of-conduct)
 - [Issues, requests and questions](#issues-requests-and-questions)
@@ -13,9 +15,9 @@ do this together.
     + [Branching strategy](#branching-strategy)
 - [Setting up your environment](#setting-up-your-environment)
     + [Importing the project](#importing-the-project)
-    + [Configuring SDK](#configuring-sdk)
+    + [Configuring the SDK](#configuring-the-sdk)
     + [Gradle wrapper](#gradle-wrapper)
-    + [Delegating build to Gradle (optional)](#delegating-build-to-gradle-optional)
+    + [Delegating the build to Gradle (optional)](#delegating-the-build-to-gradle-optional)
     + [Code style and guidelines](#code-style-and-guidelines)
 - [How to edit, run and test](#how-to-edit-run-and-test)
     + [Clean code](#clean-code)
@@ -25,197 +27,198 @@ do this together.
 
 ## Code of Conduct
 
-Let's start with this guideline about nice behavior. We follow our 
-[Code of Conduct](CODE_OF_CONDUCT.md) located in this repository.
-
-Check it out before you proceed.
+By participating in this project, you're agreeing to uphold our Code of Conduct.
+If you need to report a problem, please see the
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) located in this repository.
 
 ## Issues, requests and questions
 
-#### Creating issues
+### Creating issues
 
-To create a new issue, request or ask a question, you can use the issues tab or
-simply [click here][1].
+To report a bug, request a feature, ask a question or anything else, you can use
+the issues tab or [follow one of our templates][1].
 
-After you have created the issue, one of the maintainers will take a look at it,
-and we'll try to respond to your report in a timely manner. We like receiving any
-feedback, but please check if a similar report already exists before submitting yours.
+Any feedback is welcome, but please check if something similar already exists
+before submitting your own. After you've created the issue, one of our
+maintainers will take a look and try to respond in a timely manner.
 
-We also like getting help and working with external developers. If you want to work
-on an issue, we would like to plan that work. Please make sure that you have tagged
-one of the project maintainers in the comments section of the issue you are interested
-in working on, and we can create a work plan together.
+If you're interested in working on an issue, make sure you tag one of the
+project maintainers in the comments. From there, we'll reach out to you and
+create a plan together.
 
-#### Branching strategy
+### Branching strategy
 
-Our main/default branch is `master`. It is push-protected and you cannot push any
-changes to it without them being reviewed and checked first. In most cases, static
-checks, tests and peer reviews will happen only after you have shown us **all** of
-your work. Work-in-progress stuff needs to be marked as `[WIP]`, but you can also use
-GitHub's _"draft"_ mode.
+Our main/default branch is master. It's push-protected, so you can't push any
+changes to `master` without a review. In most cases, static checks, tests and
+peer reviews will only happen once everything is ready. Anything
+work-in-progress should be marked as `[WIP]` or you can also use GitHub's
+_Draft_ mode.
 
-Please note that most contributors don't have `write` access to this repository at
-first, so the recommended workflow to get you started would look like this:
+Most contributors won't have `write` access to this repository at first. So the
+recommended workflow would look like this:
 
-1. [Fork][2] the repository to your private GitHub space
-1. Apply your changes and move them to your repository's `master` branch. Commit messages
-should not be longer than 80 characters. Also, make sure that all of them are clear
-and understandable, and that commits are grouping changes logically
-1. You can open a PR (pull request) from the repository's *Pull Requests* tab as soon as
-you want to (i.e. you want to run checks), just make sure you put the `[WIP]` prefix in 
-the PR title. Point your `master` branch to the original repository's `master` branch. 
-We want to have evey PR linked directly to a project issue, so please reference the issue 
-you are working on in your PR's description using the `#` notation
-1. Static checks and tests are now executed on your PR before merging to `master`
-1. Once your work is done and you have no more changes, remove the `[WIP]` prefix from the
-PR title, and tag a maintainer in the comments section. We'll then assign a reviewer 
-(or two) so that we can discuss merging the PR into our `master` branch. Make sure you 
-have rebased the PR to the latest original `master` branch before asking for a review
-1. In case we request changes to your work, your new commits should start with `[Review]`
-1. After merging to `master`, the checks will run again, and (if successful) the new
-binaries will automatically be deployed from this upstream to the relevant cloud servers
-1. At this point, you can safely delete your private downstream repository
+1. [Fork this repository][2]
+1. Apply any changes to your repository's master branch. Each commit should
+group your changes logically. Your commit messages should be clear,
+understandable and under 80 characters
+1. You can open a PR (pull request) from your repository's *Pull Requests* tab.
+Point your `master` branch to the this repository's `master` branch. Every PR
+should be linked directly to a project issue, so please reference the issue
+you're working on in your PR's description using the `#` notation. If your PR
+isn't ready for review, make sure to put the `[WIP]` prefix in the PR title. After your PR is open, static checks and tests will be executed
+1. Once you're done working and you have no more changes, remove the `[WIP]`
+prefix from the PR title and tag a maintainer in the comments section. We'll
+then assign a reviewer (or two) to discuss merging your PR. Make sure you have
+rebased the PR to the latest original `master` branch before asking for a review
+1. If changes are requested, your new commits should start with `[Review]`
+1. After merging to `master`, the checks will run again. If those are successful,
+the new binaries will automatically be deployed from this upstream to the
+relevant cloud servers
+1. You can now safely delete your private downstream repository
 
-In case you have `write` access to this repository, you are already familiar with our 
-workflow, and the process is very similar:
+If you have `write` access to this repository, you're probably already familiar
+with our workflow. The process is pretty similar:
 
 1. Create a new (logically named) branch based on `master`
 1. Apply your changes to the new branch
-1. You need a new PR for your changes, pointing to `master` and referencing the issue
-1. Static checks and tests are executed on your branch along the way
-1. When done, remove the `[WIP]` PR prefix, and tag a maintainer in the comments. Make
-sure you have rebased to `master` before asking for a review
-1. In case we request changes to your work, your new commits should start with `[Review]`
-1. After merging to `master` and automatic checks verify the merge, new binaries are
-deployed to the relevant cloud servers
-1. At this point, you can safely delete your branch
+1. Create a new PR for your changes that points to `master` and references the
+issue. After your PR is open, static checks and tests will be executed
+1. When you're done working, remove the `[WIP]` PR prefix and tag a maintainer
+in the comments. Make sure you have rebased to `master` before asking for a review
+1. If changes are requested, your new commits should start with `[Review]`
+1. After merging to `master` and automatic checks verify the merge, new binaries
+are deployed to the relevant cloud servers
+1. You can now safely delete your branch
 
 ## Setting up your environment
 
-To develop this project, we used [IntelliJ IDEA](https://www.jetbrains.com/idea/) from
-JetBrains. It's a fully-featured standalone desktop IDE that supports most modern
-languages and build script configurations out of the box, and (especially appealing to
-us) it has a free community edition for all of us open-source enthusiasts.
+To develop this project, we used [IntelliJ IDEA][3] from JetBrains. It's a
+fully-featured, stand-alone desktop IDE that supports most modern languages and
+build script configurations out of the box. Plus it has a free community edition
+which we especially appreciate.
 
-Our main build tool for this project is [Gradle](https://gradle.org/).
+Our main build tool for this project is [Gradle][4].
 
-#### Importing the project
+### Importing the project
 
-The first step towards contributing is to make sure you can edit the source code using
-IntelliJ IDEA. To do this, you can choose one of the two ways:
+The first step towards contributing is to make sure you can edit the source code
+using IntelliJ IDEA. To do this, you can either:
 
 - Use the built-in "new project from git" feature in the `File` menu of your IDE
-- Clone this repository manually, then open it in the IDE from the `File` menu
+- Clone this repository manually then open it in the IDE from the `File` menu
 
-After opening the project, your IDE might ask you to import the Gradle project and all 
-of its modules. To do this, look out for the alert box on the bottom right of the IDE.
-Remember: opening is not the same as importing. Opening shows all the files available
-in the project, but importing it allows for build script integration with the IDE and
-enables other tooling and development features.
+After opening the project, your IDE might ask you to import the Gradle project
+and all its modules - look out for the alert box on the bottom right of the IDE.
+Keep in mind that opening isn't the same as importing. Opening shows all the
+files available in the project. Importing allows for build script integration
+with the IDE. It also enables other tooling and development features. So for
+this project, you're going to want to import.
 
-After importing, you will get a dialog asking for configuration options. Choose to run
-the project using the provided Gradle wrapper - this ensures that all of use use the
-same version of Gradle for assembling and packaging. You can also tick the "auto-import"
-checkbox to automatically import the dependencies and sub-modules, if any.
+Once you have Gradle imported, you'll get a dialog asking for configuration
+options. Choose to run the project using the provided Gradle wrapper. This
+ensures that everyone developing Stubbed Mock uses the same version of Gradle
+for assembling and packaging. You can also tick the "auto-import" checkbox to
+automatically import the dependencies and any sub-modules.
 
-#### Configuring SDK
+### Configuring the SDK
 
-When done, your IDE should change the user interface to reflect that you are now working
-on a Gradle project, and Gradle panel should become available in one of the sidebars.
-In some cases, you might be warned that you're missing the SDK configuration. Since we
-don't force a specific _compile_ version for Kotlin or Java, you can choose your own SDK
-version in the project/module settings. We do, however, force the output bytecode version
-to **1.6**, primarily to maintain backwards compatibility with external projects. 
+Now that you've imported everything, your IDE should change the interface to
+reflect that you're working on a Gradle project. Including a Gradle panel should
+become available in one of the sidebars.
+
+You might get a warning that you're missing the SDK configuration. Because we
+don't enforce a specific _compile_ version for Kotlin or Java, you can choose
+your own SDK version in the project/module settings. We do, however, force the
+output bytecode version to **1.6** to maintain backward compatibility with
+external projects.
 
 The project/module settings screen should looks like this:
 
 ![SDK Settings](docs/project_sdk.png)
 
-You might need to restart your IDE for this change to take effect.
+For this change to take effect, you might need to restart your IDE.
 
-#### Gradle wrapper
+### Gradle wrapper
 
-In some rare cases, due to IDE configuration or import strategy, your local Gradle wrapper
-may be missing. To fix this problem, you should create a local wrapper by running the
-`wrapper` task from the Gradle side panel. You can simply double click the task as shown:
+In rare cases, due to the IDE configuration or import strategy, your local
+Gradle wrapper may be missing. To fix this problem, you should create a local
+wrapper by running the `wrapper` task from the Gradle side panel. You can do
+this by double-clicking the task:
 
 ![Gradle wrapper task](docs/wrapper_task.png)
 
-#### Delegating build to Gradle (optional)
+### Delegating the build to Gradle (optional)
 
-Since IntelliJ IDEA uses its own build system, and doesn't run any of the pre-defined
-Gradle tasks, sometimes (although rarely) you might have missing build outputs or 
-inconsistencies between the source and the output. If this happens, we have verified
-that you can safely delegate all build tasks to Gradle by changing the Project
-Preferences, like this:
+IntelliJ IDEA uses its own build system and doesn't run any of the pre-defined
+Gradle tasks sometimes (but rarely) you'll have missing build outputs - or
+inconsistencies between the source and the output. If this happens, we've
+verified that you can safely delegate all build tasks to Gradle by changing the
+Project Preferences, like this:
 
 ![Gradle delegation](docs/delegate_to_gradle.png)
 
-We expect that your import ran smoothly, and that you can now enjoy coding with us. 😊
+Assuming that your import ran smoothly, you can now enjoy coding with us! 😊 And
+if not, you can always contact a maintainer or open an issue.
 
-#### Code style and guidelines
+### Code style and guidelines
 
-We follow our own [JVM Source Guidelines](https://github.com/blacklane/jvm-source-guidelines).
+We follow our own [JVM Source Guidelines][5].
 
 ## How to edit, run and test
 
-#### Clean code
+### Clean code
 
-As mentioned before, we like getting feedback and external contributions. But, similarly
-to our core service - professional ground transportation - we care about quality very
-much. Before submitting your changes for review, please make sure you follow the rules
-of "clean coding", like
-(Clean Code)[https://www.google.com/search?q=robert+martin+clean+code] or
-(SOLID)[https://en.wikipedia.org/wiki/SOLID] principles from Robert C. Martin.
+At Blacklane, we care deeply about quality in our core service (professional ground transportation) - and we apply similar standards to our code. Before submitting your changes for review, please be sure your changes follow the rules of clean coding, like [Clean Code][6] or [SOLID principles][7] from Robert C. Martin.
 
-#### Modules and build configuration
+### Modules and build configuration
 
-This project has two named Gradle modules, `stubbedmock-demo` and `stubbedmock-lib`,
-they reside in `demo` and `stubbedmock` directories, respectively. The library source is
-in `stubbedmock-lib`, and the most common usage examples are in `stubbedmock-demo`.
+This project has two named Gradle modules: `stubbedmock-demo` and
+`stubbedmock-lib`. They live in the `demo` and `stubbedmock` directories,
+respectively. The library source is in `stubbedmock-lib` and the most common
+usage examples are in `stubbedmock-demo`.
 
-Each of the modules has its own Gradle configuration file (`build.gradle`), but there
-is also another configuration file in the root directory that is applied to both modules.
-In that root `build.gradle`, we specified all variable dependencies that we use across
-both modules using a top-level `ext` block.
+Each of the modules has its own Gradle configuration file (`build.gradle`).
+There's also another configuration file in the root directory that is applied to
+both modules. In that root `build.gradle`, we've specified all the variable
+dependencies that we use across both modules using a top-level `ext` block.
 
-This project uses the standard
-[Gradle directory structure](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html).
+This project uses the standard [Gradle directory structure][8].
 
-#### Project versioning
+### Project versioning
 
-When making changes, you also need to increase the project version. One of the places to
-do this is in the root `build.gradle`, in `ext.projectVersion`. The other place is in the
-`README.md` file (if we specified an explicit version). 
+When making changes, you'll also need to increase the project version. This
+should change in two places: The root `build.gradle` (in `ext.projectVersion`)
+and in the `README.md` file.
 
-When coming up with new versions, we use (semantic versioning)[https://semver.org].
-In shortest terms, for new versions we increase the `minor` number. In case of a breaking
-change we increase the `major` number, and in case of an emergency quick-fix we increase
-the `patch` number. If you are not sure, ask one of the maintainers what to do. 
+We use [semantic versioning][9] to come up with new version numbers. For general
+new versions, we increase the `minor` number. For a breaking change, we increase
+the `major` number. And for an emergency quick-fix, we increase the `patch`
+number. If you aren't sure, ask one of the maintainers.
 
-#### Compiling and testing
+### Compiling and testing
 
-**StubbedMock** is a library used only in Unit tests, so there is no actual code to "run" or
-"execute" in your terminal, and there is no user interface.
+**StubbedMock** is a library that's only used in unit tests. So there isn't any
+code to "run" or "execute" in your terminal and there's no user interface.
 
-You can check if your code is working by writing Unit tests for the library. To run tests,
-you can use your IDE: right-click on the test directory and select the "Run all tests"
-option. To run the tests from the command line, you can use the standard `test` task
-(notice that we use the Gradle wrapper, `gradlew`):
+You can check if your code is working by writing unit tests for the library. To
+run tests, you can use your IDE by right-clicking on the test directory and
+selecting the "Run all tests" option. If you'd rather run the tests from the
+command line, you can use the standard `test` task (note that we use the
+Gradle wrapper, `gradlew`):
 
 ```shell
 $ ./gradlew test
 ```
 
-In case you want to build the project from the command line, you can use the standard
-`assemble` task, like so:
+If you want to build the project from the command line, you can use the standard `assemble` task, like so:
 
 ```shell
 $ ./gradlew assemble
 ```
- 
-When dealing with cached tasks using Gradle, sometimes you just want to clear the caches
-and re-build everything. This is achieved using the standard `clean` task, like so:
+
+When dealing with cached tasks using Gradle, sometimes you'll want to clear the
+caches and re-build everything. For this, you can use the standard `clean`
+task, like so:
 
 ```shell
 $ ./gradlew clean
@@ -229,3 +232,10 @@ $ ./gradlew clean assemble test
 
 [1]: https://github.com/blacklane/stubbed-mock/issues/new/choose
 [2]: https://github.com/blacklane/stubbed-mock/fork
+[3]: https://www.jetbrains.com/idea/
+[4]: https://gradle.org/
+[5]: https://github.com/blacklane/jvm-source-guidelines
+[6]: https://www.google.com/search?q=robert+martin+clean+code
+[7]: https://en.wikipedia.org/wiki/SOLID
+[8]: https://docs.gradle.org/current/userguide/organizing_gradle_projects.html
+[9]: https://semver.org

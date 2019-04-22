@@ -1,23 +1,30 @@
 # Stubbed Mock
 
 Stubbed Mock is an open-source library written in Kotlin for JVM that allows
-users to easily stub data models in a Mockito-like fashion during Unit tests.
+users to stub data models in a Mockito-like fashion during unit tests.
 
-Stubbed Mock supports plain Java and Kotlin classes, constructor and field
-injection of stubbed values, `lazy` and Kotlin's backing field properties,
-and many other complex language features, all of which are available for both
-languages.
+Stubbed Mock supports many language features like plain Java and Kotlin
+classes, constructor and field injection of stubbed values, `lazy`, Kotlin's
+backing field properties and more.
 
-Important to note: this library is not meant to replace Mockito, nor does it
-mock class (or function) behavior, its primary use is with data model classes.
+Important to note: This library isn't meant to replace Mockito and doesn't
+mock class (or function) behavior. Its primary use is for data model classes.
 
-### How to use
+### Table of Contents
 
-Let's take a look at one simple example: this is a data model you apparently
-use in many places throughout your project:
+* [Getting started](#getting-started)
+* [Including Stubbed Mock in your projects](#including-stubbed-mock-in-your-projects)
+* [Tech used](#tech-used)
+* [Reporting issues and how to contribute](#reporting-issues-and-how-to-contribute)
+* [License](#license)
+
+## Getting started
+
+To get an idea of how Stubbed Mock works, let's look at an example. Imagine this
+ is a data model that you use in many places throughout your project:
 
 ```kotlin
-// our default: Kotlin
+// Kotlin
 data class Person(
   val name: String,
   val nickname: String? = null,
@@ -26,7 +33,7 @@ data class Person(
 ```
 
 ```java
-// the same thing in Java
+// Java
 public final class Person {
 
   @NotNull private final String name;
@@ -43,28 +50,28 @@ public final class Person {
     this.age = age;
   }
 
-   // ... (more Java boilerplate)
+   // More Java boilerplate
 }
 ```
 
-You can imagine that it might be repetitive to fill in these 3 data values, in
-every test everywhere. But this is a simplified example, in reality, your data
-models will have 10 or 20 fields, all of which need to be filled with data before
-you can use the instance in your tests.
+It'd be repetitive to fill in these three data values for every test you have to
+write. And, in reality, your data models will actually have 10 or 20 fields -
+all of which need to be filled with data before you can use the instance in
+your tests.
 
-Here are some of the most representitive examples of what this library does; all of
-them are in Kotlin but you can use the same approach from Java too. For other examples,
-take a look at the `demo` directory.
+Here are some of the most representative examples of what this library does. The
+examples are  in Kotlin but you can use the same approach from Java too.  For
+other examples, take a look at the [`demo` directory](https://github.com/blacklane/stubbed-mock/tree/master/demo).
 
-**Stubbing a data model**
+### Stubbing a data model
 
 ```kotlin
 @StubbedMock lateinit var person: Person
 ```
 
-The instance that this produces is ```Person(name="name", nickname="nickname", age=0)```,
-i.e. all class member variables are set to their type's default value, and string properties
-are set to the property name (even for nullable strings).
+This produces the instance: ```Person(name="name", nickname="nickname", age=0)```.
+All class member variables are set to their type's default value. String
+properties are set to the property name (even for nullable strings).
 
 **Stubbing a data model with custom values***
 
@@ -77,16 +84,16 @@ are set to the property name (even for nullable strings).
 lateinit var person: Person
 ```
 
-The instance that this produces is ```Person(name="Marcus", nickname="Mark", age=50)```.
-Notice that here we set values for each of the properties manually, using the `Stub`
-child annotation. `@Stub` supports all basic JVM types, and you need to reference the
-property name you want to inject the value to.
+This produces the instance: ```Person(name="Marcus", nickname="Mark", age=50)```.
+Notice that we manually set values for each of the properties using the `Stub`
+ child annotation. `@Stub` supports all basic JVM types and you need to
+  reference the property name you want to inject the value to.
 
-**Initializing the mocks**
+### Initializing the mocks
 
-As you might have suspected, there needs to be an entry point. Similarly to what
-Mockito does, you need to invoke our stubbing function before you use the properties
-annotated with `@StubbedMock`. The simplest way to do so is in your setup function:
+As you might have suspected, there needs to be an entry point. Similar to
+Mockito, you need to invoke our stubbing function before you use the properties
+annotated with `@StubbedMock`. You can do this in your setup function:
 
 ```kotlin
 @Before fun setup() {
@@ -100,10 +107,10 @@ Or even shorter if this is your only line in `setup`:
 @Before fun setup() = initStubbedMocks(this)
 ```
 
-**How stubbing works**
+### How stubbing works
 
 Our stubber is a recursive instance generator. This means that it also supports more
-complex data models, such as this one:
+complex data models, like this one:
 
 ```kotlin
 data class Family(
@@ -113,20 +120,21 @@ data class Family(
 )
 ```
 
-In this case, the stubber will go through all constructor arguments, and try to stub
-in default values for them. In case it encounters a complex data type (such as `Person`),
-it recursively does the same stubbing process for this data type.
+In this case, the stubber will go through all constructor arguments and try to
+stub in default values for them. If it encounters a complex data type (such as
+  `Person`), it recursively does the same stubbing process for this data type.
 
-In case of lists, at the moment it stubs in an empty list of the proposed data type, but
-we're working on improving this in the future.
+For lists, it only stubs in an empty list of the proposed data type - but we're
+working on improving this in the future.
 
-**Filtering properties**
+### Filtering properties
 
-In case you don't want to stub special properties (like `lazy` delegated ones) or some
-pre-filled data types that class will modify later on, you can use the advanced stubbing
-feature called `Filtering`. It allows you to skip the problematic property and keep its
-value as-is. A common use-case is a `lazy` property, and to add the `lazy` filter to your
-initializer function, you can easily pass it in as an argument:
+If you don't want to stub special properties or pre-filled data types that
+class will modify later, you can use the advanced stubbing feature called
+`Filtering`. It allows you to skip that property and keep its value as-is.
+
+A common use case is the `lazy` property. To add the `lazy` filter to your
+initializer function, you can pass it in as an argument:
 
 ```kotlin
 @Before fun setup() {
@@ -135,9 +143,10 @@ initializer function, you can easily pass it in as an argument:
 }
 ```
 
-In case your property is filled later on by the class, or even externally, you might not
-want to touch it until that later moment. So, in our latest example with the `Family` model,
-you can (for example) just skip the list stubbing, like so:
+When your property will be filled by the class (or even externally) later on,
+you might not want to touch it until that moment. In this case, you can filter
+it out. For example, if we wanted to skip the list stubbing in our `Family`
+model from earlier, we can do that like so:
 
 ```kotlin
 @Before fun setup() {
@@ -146,9 +155,10 @@ you can (for example) just skip the list stubbing, like so:
 }
 ```
 
-Since list filtering is not supported out of the box, you need to provide a custom filter
-for this data type - it is pretty easy to do. Another type can replace the `List`, or you
-can do a more sophisticated check if need be. Here's the simplest `List` example:
+Because list filtering isn't supported out of the box, you need to provide a
+custom filter for this data type. You can do this by replacing the `List` with
+ another type or you can use a more sophisticated check if necessary. Here's
+ one way to do it:
 
 ```kotlin
 class ListFilter : StubFilter {
@@ -156,32 +166,31 @@ class ListFilter : StubFilter {
 }
 ```
 
-### How to include this in your projects
+## Including Stubbed Mock in your projects
 
-To include this library in your project, you need to clone the repository
-first to a separate directory inside of your project, then reference the
-`stubbedmock` folder as a Gradle module. If you are not using Gradle, you
-have to include the `stubbedmock/src/main/kotlin` as source directory. Keep
-in mind that this project is primarily meant to be used in Unit tests (not
-in production code).
+To include this library in your project, you need to clone this repository into
+a separate directory inside of your project. Then you should reference the
+[`stubbedmock` folder](stubbedmock)
+as a Gradle module. If you are not using Gradle, you have to include the
+[`stubbedmock/src/main/kotlin`](src/main/kotlin) as a source directory. Keep in mind that the primary use for this library
+is in unit tests (not production code).
 
-As soon as we have continuous integration up and running, we will update
-this section.
+As soon as we have continuous integration up and running, we'll update this section.
 
-### Tech used
+## Tech used
 
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/) - our favorite IDE
-- [Kotlin](https://kotlinlang.org/) - our favorite language
-- [JUnit](https://junit.org/junit4/) - our favorite test framework
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- [Kotlin](https://kotlinlang.org/)
+- [JUnit](https://junit.org/junit4/)
 - [Reactive streams](http://reactivex.io/) (for demo purposes only)
 
 ### Reporting issues and how to contribute
 
-Please see our [contribution guide](CONTRIBUTING.md) on how to report issues
-and include your features or bug fixes in the codebase. This document also
-contains information about the project structure and other guidelines required
-to participate in development of Stubbed Mock.
+Our [contributing guide](CONTRIBUTING.md) outlines how you can report issues
+and get involved with Stubbed Mock. There's also information on the project
+structure and other guidelines for developing new features, fixing bugs or
+other changes related to the codebase.
 
 ### License
 
-Check out the license for this project [in this document](LICENSE).
+[MIT License](LICENSE)
