@@ -15,13 +15,14 @@ apply from: "gradle/scripts/build-info-generator.gradle"
 sourceCompatibility = javaSourceLevel
 targetCompatibility = javaTargetLevel
 compileKotlin {
-    kotlinOptions.jvmTarget = kotlinTargetLevel
+  kotlinOptions.jvmTarget = kotlinTargetLevel
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = kotlinTargetLevel
+  kotlinOptions.jvmTarget = kotlinTargetLevel
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    testImplementation "junit:junit:$junitVersion"
+  api "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  implementation "org.jetbrains.kotlin:kotlin-reflect"
+  testImplementation "junit:junit:$junitVersion"
 }
