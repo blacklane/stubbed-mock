@@ -1,4 +1,4 @@
-# Contributor Covenant Code of Conduct
+# Code of Conduct
 
 ## Our Pledge
 
@@ -52,13 +52,19 @@ project e-mail address, posting via an official social media account, or acting
 as an appointed representative at an online or offline event. Representation of
 a project may be further defined and clarified by project maintainers.
 
+## Reporting
+
+If you believe you’re experiencing unacceptable behavior that will not be
+tolerated as outlined above, please reach out to one of the maintainers or send
+a message to *github@blacklane.com*
+
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported by contacting the project team using the contact information given on
-the organization's presentation page. All complaints will be reviewed and 
-investigated and will result in a response that is deemed necessary and appropriate 
-to the circumstances. The project team is obligated to maintain confidentiality 
+the organization's presentation page. All complaints will be reviewed and
+investigated and will result in a response that is deemed necessary and appropriate
+to the circumstances. The project team is obligated to maintain confidentiality
 with regard to the reporter of an incident. Further details of specific enforcement
 policies may be posted separately.
 

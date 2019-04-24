@@ -65,7 +65,8 @@ understandable and under 80 characters
 Point your `master` branch to the this repository's `master` branch. Every PR
 should be linked directly to a project issue, so please reference the issue
 you're working on in your PR's description using the `#` notation. If your PR
-isn't ready for review, make sure to put the `[WIP]` prefix in the PR title. After your PR is open, static checks and tests will be executed
+isn't ready for review, make sure to put the `[WIP]` prefix in the PR title.
+After your PR is open, static checks and tests will be executed
 1. Once you're done working and you have no more changes, remove the `[WIP]`
 prefix from the PR title and tag a maintainer in the comments section. We'll
 then assign a reviewer (or two) to discuss merging your PR. Make sure you have
@@ -186,9 +187,10 @@ This project uses the standard [Gradle directory structure][8].
 
 ### Project versioning
 
-When making changes, you'll also need to increase the project version. This
-should change in two places: The root `build.gradle` (in `ext.projectVersion`)
-and in the `README.md` file.
+If your changes require an increase in the project version, this will be
+outlined in the issue's acceptance criteria. When updating the project version,
+this should happen in two places: The root `build.gradle`
+(in `ext.projectVersion`) and in the `README.md` file.
 
 We use [semantic versioning][9] to come up with new version numbers. For general
 new versions, we increase the `minor` number. For a breaking change, we increase
@@ -210,7 +212,8 @@ Gradle wrapper, `gradlew`):
 $ ./gradlew test
 ```
 
-If you want to build the project from the command line, you can use the standard `assemble` task, like so:
+If you want to build the project from the command line, you can use the standard
+`assemble` task, like so:
 
 ```shell
 $ ./gradlew assemble

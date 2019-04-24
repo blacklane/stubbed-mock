@@ -170,10 +170,10 @@ class ListFilter : StubFilter {
 
 To include this library in your project, you need to clone this repository into
 a separate directory inside of your project. Then you should reference the
-[`stubbedmock` folder](stubbedmock)
-as a Gradle module. If you are not using Gradle, you have to include the
-[`stubbedmock/src/main/kotlin`](src/main/kotlin) as a source directory. Keep in mind that the primary use for this library
-is in unit tests (not production code).
+[`stubbedmock` folder](stubbedmock) as a Gradle module. If you aren't using
+Gradle, you have to include the [`stubbedmock/src/main/kotlin`](src/main/kotlin)
+as a source directory. Keep in mind that the primary use for this library is in
+unit tests (not production code).
 
 As soon as we have continuous integration up and running, we'll update this section.
 
@@ -184,13 +184,13 @@ As soon as we have continuous integration up and running, we'll update this sect
 - [JUnit](https://junit.org/junit4/)
 - [Reactive streams](http://reactivex.io/) (for demo purposes only)
 
-### Reporting issues and how to contribute
+## Reporting issues and how to contribute
 
 Our [contributing guide](CONTRIBUTING.md) outlines how you can report issues
 and get involved with Stubbed Mock. There's also information on the project
 structure and other guidelines for developing new features, fixing bugs or
 other changes related to the codebase.
 
-### License
+## License
 
 [MIT License](LICENSE)
