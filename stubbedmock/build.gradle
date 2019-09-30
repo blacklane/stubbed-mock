@@ -1,5 +1,12 @@
 apply plugin: "java"
 apply plugin: "kotlin"
+apply plugin: 'com.github.dcendents.android-maven' // used for generating Maven files
+apply plugin: 'com.jfrog.bintray' // used for uploading to Bintray/jCenter (sync to MavenCentral is automatic)
+
+ext {
+  // needed for bintrayUpload
+  VERSION_NAME = projectVersion
+}
 
 group 'com.blacklane.jvm'
 version projectVersion
@@ -26,3 +33,5 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-reflect"
   testImplementation "junit:junit:$junitVersion"
 }
+
+apply from: 'gradle/scripts/gradle-mvn-push.gradle'
