@@ -168,14 +168,12 @@ class ListFilter : StubFilter {
 
 ## Including Stubbed Mock in your projects
 
-To include this library in your project, you need to clone this repository into
-a separate directory inside of your project. Then you should reference the
-[`stubbedmock` folder](stubbedmock) as a Gradle module. If you aren't using
-Gradle, you have to include the [`stubbedmock/src/main/kotlin`](src/main/kotlin)
-as a source directory. Keep in mind that the primary use for this library is in
-unit tests (not production code).
-
-As soon as we have continuous integration up and running, we'll update this section.
+To use `stubbed-mock` in your tests, the easiest way is to include it using Gradle.
+Put the following line in your module dependencies:
+```groovy
+testImplementation 'com.blacklane.jvm:stubbedmock-lib:<latest_version>'
+```
+The latest version could be found here: [ ![Latest Version](https://api.bintray.com/packages/bl-opensource/Maven/stubbedmock-lib/images/download.svg) ](https://bintray.com/bl-opensource/Maven/stubbedmock-lib/_latestVersion)
 
 ## Tech used
 
