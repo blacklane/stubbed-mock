@@ -1,0 +1,39 @@
+language: java
+
+dist: trusty
+
+jdk:
+  - oraclejdk8
+
+before_install:
+  - chmod +x gradlew
+
+# define all stages
+stages:
+  - name: pull_request
+    if: type IN (pull_request)
+  - name: master
+    if: branch = master AND type = push AND fork = false
+  - name: release
+    if: branch = release AND type = push AND fork = false
+
+jobs:
+  include:
+    - stage: pull_request
+      script:
+        - ./gradlew clean
+        - ./gradlew assemble
+        - ./gradlew test
+    - stage: master
+      script:
+        - ./gradlew clean
+        - ./gradlew assemble
+        - ./gradlew install
+        - ./gradlew test
+    - stage: release
+      script:
+        - ./gradlew clean
+        - ./gradlew assemble
+        - ./gradlew install
+        - ./gradlew test
+        - ./gradlew bintrayUpload

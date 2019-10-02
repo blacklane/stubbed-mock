@@ -81,6 +81,9 @@ build/
 .idea/*.iml
 .idea/modules
 
+# Local configuration file (sdk path, etc)
+local.properties
+
 # CMake
 cmake-build-*/
 
